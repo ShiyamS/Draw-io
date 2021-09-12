@@ -108,11 +108,11 @@
 
     }
 
-    canvas.addEventListener("touchstart", drawMobile)
-    canvas.addEventListener("touchmove", (e) => {
+    canvas.addEventListener("touchstart", (e) => {
       isDrawing = true;
       [lastX, lastY] = [e.clientX, e.clientY]
-    });
+    })
+    canvas.addEventListener("touchmove", drawMobile);
     canvas.addEventListener("touchend", () => isDrawing = false);
   </script>
 

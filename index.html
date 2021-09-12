@@ -27,6 +27,11 @@
     let hue = 0;
     let direction = true;
 
+    // Mobile
+
+    let clientX = 0;
+    let clientY = 0;
+
 
     function draw(e) {
 
@@ -74,10 +79,42 @@
 
     // Touch Events
 
-    canvas.addEventListener("touchstart", draw);
+    function drawMobile(e) {
+
+      if (!isDrawing) return;
+
+      // console.log(e)
+
+      ctx.strokeStyle = `hsl(${hue},100%,50%)`
+      // ctx.lineWidth = hue;
+      ctx.beginPath();
+      // start form 0
+      ctx.moveTo(clientX, clientY);
+      // // go to
+      ctx.lineTo(e.pageX, e.pageY);
+      ctx.stroke();
+      [clientX, clientY] = [e.pageX, e.pageY]
+      hue++;
+
+      if (hue >= 360) {
+        hue = 0;
+      }
+
+      if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
+        direction = !direction;
+      }
+      if (direction) {
+        ctx.lineWidth++;
+      } else {
+        ctx.lineWidth--;
+      }
+
+    }
+
+    canvas.addEventListener("touchstart", drawMobile);
     canvas.addEventListener("touchmove", (e) => {
       isDrawing = true;
-      [lastX, lastY] = [e.offsetX, e.offsetY]
+      [clientX, clientY] = [e.pageX, e.pageY]
     });
     canvas.addEventListener("touchend", () => isDrawing = false);
   </script>

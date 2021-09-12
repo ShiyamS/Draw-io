@@ -27,17 +27,14 @@
     let hue = 0;
     let direction = true;
 
-    // Mobile
 
-    let clientX = 0;
-    let clientY = 0;
 
 
     function draw(e) {
 
       if (!isDrawing) return;
 
-      // console.log(e)
+      console.log(e)
 
       ctx.strokeStyle = `hsl(${hue},100%,50%)`
       // ctx.lineWidth = hue;
@@ -89,11 +86,11 @@
       // ctx.lineWidth = hue;
       ctx.beginPath();
       // start form 0
-      ctx.moveTo(clientX, clientY);
+      ctx.moveTo(lastX, lastY);
       // // go to
       ctx.lineTo(e.screenX, e.screenY);
       ctx.stroke();
-      [clientX, clientY] = [e.screenX, e.screenY]
+      [lastX, lastY] = [e.screenX, e.screenY]
       hue++;
 
       if (hue >= 360) {
@@ -111,11 +108,11 @@
 
     }
 
-    canvas.addEventListener("touchstart", drawMobile);
-    canvas.addEventListener("touchmove", (e) => {
+    canvas.addEventListener("touchstart", (e) => {
       isDrawing = true;
-      [clientX, clientY] = [e.screenX, e.screenY]
+      [lastX, lastY] = [e.screenX, e.screenY]
     });
+    canvas.addEventListener("touchmove", drawMobile);
     canvas.addEventListener("touchend", () => isDrawing = false);
   </script>
 

@@ -83,7 +83,7 @@
 
       if (!isDrawing) return;
 
-      // console.log(e)
+      console.log(e)
 
       ctx.strokeStyle = `hsl(${hue},100%,50%)`
       // ctx.lineWidth = hue;
@@ -91,9 +91,9 @@
       // start form 0
       ctx.moveTo(clientX, clientY);
       // // go to
-      ctx.lineTo(e.pageX, e.pageY);
+      ctx.lineTo(e.screenX, e.screenY);
       ctx.stroke();
-      [clientX, clientY] = [e.pageX, e.pageY]
+      [clientX, clientY] = [e.screenX, e.screenY]
       hue++;
 
       if (hue >= 360) {
@@ -114,7 +114,7 @@
     canvas.addEventListener("touchstart", drawMobile);
     canvas.addEventListener("touchmove", (e) => {
       isDrawing = true;
-      [clientX, clientY] = [e.pageX, e.pageY]
+      [clientX, clientY] = [e.screenX, e.screenY]
     });
     canvas.addEventListener("touchend", () => isDrawing = false);
   </script>

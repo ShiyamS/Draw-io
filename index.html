@@ -88,9 +88,9 @@
       // start form 0
       ctx.moveTo(lastX, lastY);
       // // go to
-      ctx.lineTo(e.screenX, e.screenY);
+      ctx.lineTo(e.clientX, e.clientY);
       ctx.stroke();
-      [lastX, lastY] = [e.screenX, e.screenY]
+      [lastX, lastY] = [e.clientX, e.clientY]
       hue++;
 
       if (hue >= 360) {
@@ -108,11 +108,11 @@
 
     }
 
-    canvas.addEventListener("touchstart", drawMobile)
-    canvas.addEventListener("touchmove", (e) => {
+    canvas.addEventListener("touchstart", (e) => {
       isDrawing = true;
-      [lastX, lastY] = [e.screenX, e.screenY]
-    });
+      [lastX, lastY] = [e.clientX, e.clientY]
+    })
+    canvas.addEventListener("touchmove", drawMobile);
     canvas.addEventListener("touchend", () => isDrawing = false);
   </script>
 
